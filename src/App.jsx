@@ -1,19 +1,17 @@
-import React, { createContext, useState } from 'react';
+import React from 'react';
 import { Toaster } from 'react-hot-toast';
 import ShoppingPage from './Pages/ShoppingPage';
+import { CartProvider } from './Provider/CartProvider';
 
-export const CartContext = createContext()
 
 const App = () => {
 
-  const [cartList, setCartList] = useState([])
 
   return (
     <div>
-      <CartContext.Provider value={{cartList,setCartList}} >
-      <ShoppingPage />
-      </CartContext.Provider>
-
+      <CartProvider>
+       <ShoppingPage/>
+      </CartProvider>
       <Toaster position='top-right' />
     </div>
   );

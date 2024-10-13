@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { IoMdCart } from 'react-icons/io';
-import { CartContext } from '../App';
 import toast from 'react-hot-toast'
+import { useCart } from '../Hooks';
 
 const ProductList = ({ product, setSelectedProduct,cart}) => {
 
-    const {cartList, setCartList} = useContext(CartContext)
+    const {cartList, setCartList} = useCart()
 
     const handleAddToCart = () => {
         const exist = cartList.find((Element) => Element.id == product.id)
@@ -61,10 +61,10 @@ const ProductList = ({ product, setSelectedProduct,cart}) => {
             <div  onClick={() => setSelectedProduct(product)}>
                 <h5 className='text-truncate'>{product.title}</h5>
                 <p className='text-truncate'>{product.description}</p>
-                </div>
+            </div>
                 {
                     !cart &&
-                    <div className='d-flex gap-2 justify-content-between'>
+                    <div className='d-flex gap-2 justify-content-between' >
                         <div style={{color:'black'}}>
                             <span className='mx-2 ' style={{color:'red'}}> <s>Rs {product.price}</s></span>
                             <span>Rs {(product.price - (product.price * product.discountPercentage / 100)).toFixed(2)}</span>
@@ -73,7 +73,8 @@ const ProductList = ({ product, setSelectedProduct,cart}) => {
                     </div>
                 }
                 {
-                    cart && <div>
+                    cart && 
+                        <div>
                         <div> Price : {product.totalPrice.toFixed(2)}</div>
                             <div className='d-flex justify-content-between align-items-center'>
                                 <button onClick={() => handleQtyUpdate("-")} style={{height: "30px", width: "30px"}} className='border-1 bg-primary rounded-1'>- </button>

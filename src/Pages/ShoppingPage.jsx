@@ -1,14 +1,14 @@
-import React, { Fragment, useContext, useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import { products } from '../constant/Products';
 import ProductList from '../Components/ProductList';
 import Modal from '../Components/Modal';
 import NavBar from '../Components/NavBar';
-import { CartContext } from '../App';
+import { useCart } from '../Hooks';
 
 const ShoppingPage = () => {
 
     const [selectedProduct, setSelectedProduct] = useState(null)
-    const {cartList} = useContext(CartContext)
+    const {cartList} = useCart()
     
 
     return (
@@ -37,10 +37,11 @@ const ShoppingPage = () => {
                 <div className='d-flex gap-1 flex-wrap'>
                     {
                         cartList.map((product) => {
-                            return <ProductList 
+                            return <ProductList
                             product={product}
                             key={product.id} 
                             cart={true}
+                            setSelectedProduct={setSelectedProduct}
                             />
                         })
                     }

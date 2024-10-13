@@ -1,12 +1,12 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Container, Navbar } from 'react-bootstrap';
 import {} from 'react-icons';
 import { IoMdCart, IoMdHeart } from 'react-icons/io';
-import { CartContext } from '../App';
+import { useCart } from '../Hooks';
 
 const NavBar = () => {
 
-    const {cartList, setCartList} = useContext(CartContext)
+    const {cartList} = useCart()
     
 
     return (

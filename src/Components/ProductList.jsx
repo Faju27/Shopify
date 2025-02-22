@@ -6,9 +6,12 @@ import { useCart } from '../Hooks';
 const ProductList = ({ product, setSelectedProduct,cart}) => {
 
     const {cartList, setCartList} = useCart()
-
+console.log(product);
     const handleAddToCart = () => {
-        const exist = cartList.find((Element) => Element.id == product.id)
+        const exist = cartList.find((Element) => {
+            return console.log(Element.id),
+            console.log(product.id)
+        })
         if (exist) {
             const res = cartList.map((Element) => {
                 if (Element.id == product.id) {
@@ -75,20 +78,20 @@ const ProductList = ({ product, setSelectedProduct,cart}) => {
                 {
                     cart && 
                         <div>
-                        <div> Price : {product.totalPrice.toFixed(2)}</div>
-                            <div className='d-flex justify-content-between align-items-center'>
-                                <button onClick={() => handleQtyUpdate("-")} style={{height: "30px", width: "30px"}} className='border-1 bg-primary rounded-1'>- </button>
-                                <div> {product.quantity}  </div>
-                                <button onClick={() => handleQtyUpdate("+")} style={{height: "30px", width: "30px"}} className='border-1 bg-primary rounded-1'>+</button>
+                            <div> Price : {product.totalPrice.toFixed(2)}</div>
+                                <div className='d-flex justify-content-between align-items-center'>
+                                    <button onClick={() => handleQtyUpdate("-")} style={{height: "30px", width: "30px"}} className='border-1 bg-primary rounded-1'>- </button>
+                                    <div> {product.quantity}  </div>
+                                    <button onClick={() => handleQtyUpdate("+")} style={{height: "30px", width: "30px"}} className='border-1 bg-primary rounded-1'>+</button>
+                                </div>
+                            </div>
+                }
+                            <div>
+                                { cart ? <button className='btn btn-outline-danger w-100 mt-3' onClick={removeCartProduct}><IoMdCart size={20}/> Remove from Cart</button>
+                                    : <button className='btn btn-outline-success w-100 mt-3' onClick={handleAddToCart}><IoMdCart size={20}/> Add to Cart</button>
+                            }
                             </div>
                         </div>
-                }
-            <div>
-                { cart ? <button className='btn btn-outline-danger w-100 mt-3' onClick={removeCartProduct}><IoMdCart size={20}/> Remove from Cart</button>
-                       : <button className='btn btn-outline-success w-100 mt-3' onClick={handleAddToCart}><IoMdCart size={20}/> Add to Cart</button>
-            }
-            </div>
-        </div>
     );
 }
 
